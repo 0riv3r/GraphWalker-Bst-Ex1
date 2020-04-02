@@ -1,0 +1,37 @@
+HEADER<{{
+package com.cyberark;
+
+import org.graphwalker.core.machine.ExecutionContext;
+import org.graphwalker.java.annotation.GraphWalker;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.graphwalker.core.condition.ReachedVertex;
+import org.graphwalker.core.generator.AStarPath;
+import org.graphwalker.core.model.Edge;
+import org.graphwalker.java.test.TestBuilder;
+import org.junit.Test;
+
+public class BstTest extends ExecutionContext implements BstModel {
+
+  public final static Path MODEL_PATH = Paths.get("com/cyberark/BstModel.json");
+  private Bst<Integer> bst;
+}}>HEADER
+  @Override
+  public void {LABEL}()
+  {
+    System.out.println( "{LABEL}" );
+    // throw new RuntimeException( "{LABEL} is not implemented yet!" );
+  }
+FOOTER<{{
+  @Test
+    public void runSmokeTest() {
+        new TestBuilder()
+                .addContext(new BstTest().setNextElement(new Edge().setName("e_Add").build()),
+                        MODEL_PATH,
+                        new AStarPath(new ReachedVertex("v_Found")))
+                .execute();
+    }
+}
+}}>FOOTER
