@@ -36,6 +36,14 @@ public class BstTest extends ExecutionContext implements BstModel {
 
 
   @Override
+  public void e_Init()
+  {
+    System.out.println( "e_Init" );
+    // throw new RuntimeException( "e_Init is not implemented yet!" );
+  }
+
+
+  @Override
   public void v_Added()
   {
     System.out.println( "v_Added" );
@@ -52,6 +60,14 @@ public class BstTest extends ExecutionContext implements BstModel {
 
 
   @Override
+  public void v_Start()
+  {
+    System.out.println( "v_Start" );
+    // throw new RuntimeException( "v_Start is not implemented yet!" );
+  }
+
+
+  @Override
   public void v_VerifyInitialState()
   {
     System.out.println( "v_VerifyInitialState" );
@@ -62,7 +78,7 @@ public class BstTest extends ExecutionContext implements BstModel {
   @Test
     public void runSmokeTest() {
         new TestBuilder()
-                .addContext(new BstTest().setNextElement(new Edge().setName("e_Add").build()),
+                .addContext(new BstTest().setNextElement(new Edge().setName("e_Init").build()),
                         MODEL_PATH,
                         new AStarPath(new ReachedVertex("v_Found")))
                 .execute();

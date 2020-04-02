@@ -38,7 +38,7 @@ To connect 2 vertices with an edge: press the 'e' key and connect the two vertic
 To set a vertex as a start point, click on it with the right mouse and choose from the list.
 
 
-v_VerifyInitialState --> e_Add --> v_Added --> e_Find --> v_Found --> { e_Find --> v_Found , e_Add --> vAdded } 
+v_Start --> e_Init --> v_VerifyInitialState --> e_Add --> v_Added --> e_Find --> v_Found --> { e_Find --> v_Found , e_Add --> vAdded } 
 
 Save the model as: 
 

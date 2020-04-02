@@ -285,7 +285,7 @@ public class BstTest extends ExecutionContext implements BstModel {
   @Test
     public void runSmokeTest() {
         new TestBuilder()
-                .addContext(new BstTest().setNextElement(new Edge().setName("e_Add").build()),
+                .addContext(new BstTest().setNextElement(new Edge().setName("e_Init").build()),
                         MODEL_PATH,
                         new AStarPath(new ReachedVertex("v_Found")))
                 .execute();
