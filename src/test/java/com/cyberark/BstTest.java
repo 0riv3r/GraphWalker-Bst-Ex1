@@ -35,6 +35,7 @@ public class BstTest extends ExecutionContext implements BstModel {
   public void e_Add()
   {
     System.out.println( "e_Add" );
+    System.out.println( String.valueOf(valsCounter) );
     bst.add(vals.set(valsCounter, valsCounter++));
   }
 
@@ -53,7 +54,7 @@ public class BstTest extends ExecutionContext implements BstModel {
     System.out.println( "e_Init" );
     bst = new Bst<Integer>();
     vals = new ArrayList<Integer>();
-    for(int i=0;i<1000;++i){
+    for(int i=0;i<700;++i){
       vals.add(i, i);
     }
     valsCounter = 0;
