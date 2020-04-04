@@ -472,8 +472,21 @@ $ mvn clean graphwalker:generate-sources test jacoco:prepare-agent jacoco:report
 
 -----------------------------------------------------------------------------------------------
 
-*** Coverage ***
-================
+*** Reports ***
+===============
+
+Junit
+=====
+
+You can find the Junit report under:
+target/site/surefire-report.html
+
+If you installed the 'Preview on Web Server' extension:
+-------------------------------------------------------
+open it, click on the opened file with the right mouse and choose to open it in a browser
+
+Coverage
+========
 
 You can find the coverage report under:
 target/site/jacoco/index.html
