@@ -1,24 +1,32 @@
 *** Create the Bst first partial GraphWalker Test ***
 =====================================================
 
-*** junit ***
+*** VS-Code extensions ***
+==========================
+
+if you are using VS-Code as your IDE, install the following extensions:
+
+- Java extension pack
+- Coverage Gutters
+- Preview on Web Server
+
+-----------------------------------------------------------------------------------------------
+
+*** Junit ***
 =============
 
-We are going to use junit as our test runner (executor)
+We will be using junit as our test runner (executor)
 
-For the junit jars to be in the classpath of your project, you have to place them and set the project according to your IDE
+I am using maven, and so I add the dependencies in the pom.xml as I show below
 
-I am using VS-code
+-----------------------------------------------------------------------------------------------
 
-In VS-Code, all the external jar files that are in the lib folder under the project root, are in the project's classpath.
+*** Jacoco ***
+=============
 
-navigate to: https://github.com/junit-team/junit4/wiki/Download-and-Install
+We will be using jacoco as our test coverage tool.
 
-and follow the links of:
-junit.jar
-hamcrest-core.jar
-
-and choose to download them as jar files and place the under lib/
+I am using maven, and so I add the dependencies in the pom.xml as I show below
 
 -----------------------------------------------------------------------------------------------
 
@@ -36,9 +44,8 @@ Under properties:
 add dependencies:
 -----------------
 
-Dependencies
 <dependencies>
-    <!-- Testing Dependencies-->
+    <!--  Testing Dependencies-->
     <dependency>
         <groupId>org.graphwalker</groupId>
         <artifactId>graphwalker-core</artifactId>
@@ -66,36 +73,101 @@ Dependencies
         <version>1.6.2</version>
         <scope>test</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/junit/junit -->
     <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.13</version>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>5.4.2</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>5.4.2</version>
         <scope>test</scope>
     </dependency>
 </dependencies>
-As you can see above, we add also junit dependency since we are going to use junit as our test runner (executor)
-
-took from here: https://mvnrepository.com/artifact/junit/junit/4.12
 
 
-In plugins:
------------
+Plugins:
+--------
 
-<plugin>
-    <groupId>org.graphwalker</groupId>
-    <artifactId>graphwalker-maven-plugin</artifactId>
-    <version>${graphwalker.version}</version>
-    <executions>
-        <execution>
-            <id>generate-sources</id>
-            <phase>generate-sources</phase>
-            <goals>
-                <goal>generate-sources</goal>
-            </goals>
-        </execution>
-    </executions>
-</plugin>
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.2</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>prepare-agent</goal>
+                    </goals>
+                </execution>
+                <execution>
+                    <id>report</id>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>report</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+        <plugin>
+            <artifactId>maven-clean-plugin</artifactId>
+            <version>3.1.0</version>
+        </plugin>
+        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+        <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>3.0.2</version>
+        </plugin>
+        <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.0</version>
+        </plugin>
+        <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.22.1</version>
+        </plugin>
+        <plugin>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.0.2</version>
+        </plugin>
+        <plugin>
+            <artifactId>maven-install-plugin</artifactId>
+            <version>2.5.2</version>
+        </plugin>
+        <plugin>
+            <artifactId>maven-deploy-plugin</artifactId>
+            <version>2.8.2</version>
+        </plugin>
+        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+        <plugin>
+            <artifactId>maven-site-plugin</artifactId>
+            <version>3.7.1</version>
+        </plugin>
+        <plugin>
+            <artifactId>maven-project-info-reports-plugin</artifactId>
+            <version>3.0.0</version>
+        </plugin>
+        <plugin>
+            <groupId>org.graphwalker</groupId>
+            <artifactId>graphwalker-maven-plugin</artifactId>
+            <version>${graphwalker.version}</version>
+            <executions>
+                <execution>
+                    <id>generate-sources</id>
+                    <phase>generate-sources</phase>
+                    <goals>
+                        <goal>generate-sources</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+
 You can replace your project's pom.xml file with the pom.xml that is attached with this page.
 
 
@@ -158,6 +230,12 @@ Download the java.template into:
 
 src/main/templates/java.template
 
+* Note that in the template each generated test method will have the following line as comment:
+
+// throw new RuntimeException( "{LABEL} is not implemented yet!" );
+This line is set to be generated as comment for the  training, 
+it is recommended that in real life this line will not be commented to make sure to explicitly implement or not
+
 -----------------------------------------------------------------------------------------------
 
 java.template:
@@ -171,12 +249,22 @@ import org.graphwalker.java.annotation.GraphWalker;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
+import org.graphwalker.core.condition.EdgeCoverage;
 import org.graphwalker.core.condition.ReachedVertex;
 import org.graphwalker.core.generator.AStarPath;
+import org.graphwalker.core.generator.RandomPath;
 import org.graphwalker.core.model.Edge;
 import org.graphwalker.java.test.TestBuilder;
-import org.junit.Test;
+import org.graphwalker.core.condition.TimeDuration;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.Test;
 
 /** 
 * Set Class name
@@ -226,7 +314,6 @@ FOOTER<{{
 }
 }}>FOOTER
 
-
 -----------------------------------------------------------------------------------------------
 
 Create the test directory structure:
@@ -252,88 +339,98 @@ The generated BstTest.java file:
 --------------------------------
 
 package com.cyberark;
- 
+
 import org.graphwalker.core.machine.ExecutionContext;
 import org.graphwalker.java.annotation.GraphWalker;
- 
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
- 
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
+import org.graphwalker.core.condition.EdgeCoverage;
 import org.graphwalker.core.condition.ReachedVertex;
 import org.graphwalker.core.generator.AStarPath;
+import org.graphwalker.core.generator.RandomPath;
 import org.graphwalker.core.model.Edge;
 import org.graphwalker.java.test.TestBuilder;
-import org.junit.Test;
- 
-/**
+import org.graphwalker.core.condition.TimeDuration;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.Test;
+
+/** 
 * Set Class name
 * Set Model name this class implements
 * Set Model name in MODEL_PATH
 * Set vertex name for the smoke-test to stop at
 */
- 
+
 /** *** Set Class & Model names *** */
 public class MyTest extends ExecutionContext implements MyModel {
- 
+
   public final static Path MODEL_PATH = Paths.get("com/cyberark/MyModel.json"); // *** Set model name ***
- 
- 
+
+
   @Override
   public void e_Add()
   {
     System.out.println( "e_Add" );
     // throw new RuntimeException( "e_Add is not implemented yet!" );
   }
- 
- 
+
+
   @Override
   public void e_Find()
   {
     System.out.println( "e_Find" );
     // throw new RuntimeException( "e_Find is not implemented yet!" );
   }
- 
- 
+
+
   @Override
   public void e_Init()
   {
     System.out.println( "e_Init" );
     // throw new RuntimeException( "e_Init is not implemented yet!" );
   }
- 
- 
+
+
   @Override
   public void v_Added()
   {
     System.out.println( "v_Added" );
     // throw new RuntimeException( "v_Added is not implemented yet!" );
   }
- 
- 
+
+
   @Override
   public void v_Found()
   {
     System.out.println( "v_Found" );
     // throw new RuntimeException( "v_Found is not implemented yet!" );
   }
- 
- 
+
+
   @Override
   public void v_Start()
   {
     System.out.println( "v_Start" );
     // throw new RuntimeException( "v_Start is not implemented yet!" );
   }
- 
- 
+
+
   @Override
   public void v_VerifyInitialState()
   {
     System.out.println( "v_VerifyInitialState" );
     // throw new RuntimeException( "v_VerifyInitialState is not implemented yet!" );
   }
- 
- 
+
+
   @Test
     public void runSmokeTest() {
         new TestBuilder()
@@ -342,7 +439,7 @@ public class MyTest extends ExecutionContext implements MyModel {
                         new AStarPath(new ReachedVertex("v_MyVertex"))) // *** Set vertex name of the vertex to stop at ***
                 .execute();
     }
- 
+
     @Test
     public void runFunctionalTest() {
         new TestBuilder()
@@ -351,7 +448,7 @@ public class MyTest extends ExecutionContext implements MyModel {
                         new RandomPath(new EdgeCoverage(100))) // cover all edges
                 .execute();
     }
- 
+
     @Test
     public void runStabilityTest() {
         new TestBuilder()
@@ -370,9 +467,25 @@ public class MyTest extends ExecutionContext implements MyModel {
 If required, make sure to use the correct java
 $ export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 
-Run the test
-$ mvn clean graphwalker:generate-sources test
+$ mvn clean install
+$ mvn clean graphwalker:generate-sources test jacoco:prepare-agent jacoco:report
 
 -----------------------------------------------------------------------------------------------
 
+*** Coverage ***
+================
+
+You can find the coverage report under:
+target/site/jacoco/index.html
+
+If you installed the 'Coverage Gutters' extension:
+--------------------------------------------------
+open the Bst.java file and click on 'Watch' at the bottom of VS-Code
+You should see marks on the left side of the Bst.java file that mark the covered/uncovered lines
+
+If you installed the 'Preview on Web Server' extension:
+-------------------------------------------------------
+open it, click on the opened file with the right mouse and choose to open it in a browser
+
+-----------------------------------------------------------------------------------------------
 
