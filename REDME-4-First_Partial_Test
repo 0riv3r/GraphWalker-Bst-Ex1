@@ -479,6 +479,7 @@ Junit
 =====
 
 You can find the Junit report under:
+target/site/index.html
 target/site/surefire-report.html
 
 If you installed the 'Preview on Web Server' extension:
