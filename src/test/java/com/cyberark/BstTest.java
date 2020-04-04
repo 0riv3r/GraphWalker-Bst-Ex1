@@ -4,10 +4,6 @@ package com.cyberark;
 import org.graphwalker.core.machine.ExecutionContext;
 import org.graphwalker.java.annotation.GraphWalker;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -21,7 +17,11 @@ import org.graphwalker.core.model.Edge;
 import org.graphwalker.java.test.TestBuilder;
 import org.graphwalker.core.condition.TimeDuration;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.Test;
 
 public class BstTest extends ExecutionContext implements BstModel {
 
@@ -74,7 +74,7 @@ public class BstTest extends ExecutionContext implements BstModel {
   public void v_Found()
   {
     System.out.println( "v_Found" );
-    assertTrue("Find failed!", result);
+    assertTrue(result, "Find failed!");
   }
 
 

@@ -367,6 +367,9 @@ public class MyTest extends ExecutionContext implements MyModel {
 *** Execute the test ***
 ========================
 
+If required, make sure to use the correct java
+$ export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+
 Run the test
 $ mvn clean graphwalker:generate-sources test
 
