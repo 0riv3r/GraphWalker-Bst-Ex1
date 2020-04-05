@@ -1,7 +1,8 @@
-*** Add functionality to test ***
-=================================
+*** test one more functionality ***
+===================================
 
-In this page we add one more functionality to the model:
+In this page we add one more functionality to the model and test files that should be tested. 
+(a functionality that is already implemented in the Bst.java):
 - The Bst 'find' API should return 'false' when not finding the requested value
 
 Find
