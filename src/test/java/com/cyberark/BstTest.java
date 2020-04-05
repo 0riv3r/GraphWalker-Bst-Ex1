@@ -7,6 +7,9 @@ import org.graphwalker.java.annotation.GraphWalker;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.graphwalker.core.condition.EdgeCoverage;
@@ -27,16 +30,18 @@ public class BstTest extends ExecutionContext implements BstModel {
 
   public final static Path MODEL_PATH = Paths.get("com/cyberark/BstModel.json");
   private Bst<Integer> bst;
-  ArrayList<Integer> vals;
-  private int valsCounter;
+  private ArrayList<Integer> vals;
+  private HashSet<Integer> inTree;
+  private Random rand;
   private boolean result;
 
   @Override
   public void e_Add()
   {
     System.out.println( "e_Add" );
-    System.out.println( String.valueOf(valsCounter) );
-    bst.add(vals.set(valsCounter, valsCounter++));
+    int val = vals.get(rand.nextInt(vals.size()));
+    bst.add(val);
+    inTree.add(val);
   }
 
 
@@ -44,7 +49,10 @@ public class BstTest extends ExecutionContext implements BstModel {
   public void e_Find()
   {
     System.out.println( "e_Find" );
-    result = bst.find(vals.get(valsCounter-1));
+    //convert HashSet to an array to fetch element by random index
+    Integer[] arrInTreeVals = inTree.toArray( new Integer[inTree.size()] );
+    int randomIndex = rand.nextInt(inTree.size());
+    result = bst.find(arrInTreeVals[randomIndex]);
   }
 
 
@@ -53,11 +61,9 @@ public class BstTest extends ExecutionContext implements BstModel {
   {
     System.out.println( "e_Init" );
     bst = new Bst<Integer>();
-    vals = new ArrayList<Integer>();
-    for(int i=0;i<700;++i){
-      vals.add(i, i);
-    }
-    valsCounter = 0;
+    vals = new ArrayList<Integer>(Arrays.asList(1, 3, 4, 6, 7, 8, 10, 13, 14));
+    inTree = new HashSet<Integer>();
+    rand = new Random();
     result = false;
   }
 
@@ -66,7 +72,7 @@ public class BstTest extends ExecutionContext implements BstModel {
   public void v_Added()
   {
     System.out.println( "v_Added" );
-    assertEquals(valsCounter, bst.nodes().size());
+    assertEquals(inTree.size(), bst.nodes().size());
   }
 
 
