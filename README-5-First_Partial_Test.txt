@@ -177,7 +177,7 @@ You can replace your project's pom.xml file with the pom.xml that is attached wi
 *** Generate the Test Interface ***
 ===================================
 
-run the following command to generate the test skeleton:
+run the following command to generate the test-interface:
 
 $ export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
  
@@ -324,14 +324,14 @@ test/java/com/cyberark
 
 Run the following command when you under the project root folder, to generate the test file that will be generated under test as: 
 
-src/test/java/com/cyberark/BstTest.java
+src/test/java/com/cyberark/MyTest.java
 
 Generate test file:
 -------------------
 
 $ java -jar ../lib/graphwalker-cli-4.2.0.jar source -i src/main/resources/com/cyberark/BstModel.json src/main/templates/java.template > src/test/java/com/cyberark/MyTest.java
 
-and rename the generated test file to the right file name
+and rename the generated test file to the right file name (i.e. 'BstTest.java')
 
 -----------------------------------------------------------------------------------------------
 
@@ -468,7 +468,7 @@ If required, make sure to use the correct java
 $ export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 
 $ mvn clean install
-$ mvn clean graphwalker:generate-sources test jacoco:prepare-agent jacoco:report
+$ mvn clean graphwalker:generate-sources test site jacoco:prepare-agent jacoco:report
 
 -----------------------------------------------------------------------------------------------
 

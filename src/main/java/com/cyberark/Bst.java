@@ -156,7 +156,6 @@ public class Bst<T extends Comparable<T>> {
         bst.add(3);
         assert(bst.find(14) == true);
         assert(bst.find(42) == false);
-        assert(bst.find(42) == false);
         assert(bst.smallest() == 1);
         assert(bst.largest() == 14);
 
