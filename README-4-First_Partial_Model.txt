@@ -31,6 +31,8 @@ Launch the GraphWalker studio:
 
 java -jar ../lib/graphwalker-studio-4.2.0.jar
 
+Open browser at: http://localhost:9090/studio.html
+
 To add a vertex: press the 'v' key and click the left mouse
 
 To connect 2 vertices with an edge: press the 'e' key and connect the two vertices with press the left mouse and move it from one vertex to the other while pressing the left mouse

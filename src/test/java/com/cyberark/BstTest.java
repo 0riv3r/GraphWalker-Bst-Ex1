@@ -22,6 +22,7 @@ import org.graphwalker.core.condition.TimeDuration;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
@@ -31,6 +32,7 @@ public class BstTest extends ExecutionContext implements BstModel {
   public final static Path MODEL_PATH = Paths.get("com/cyberark/BstModel.json");
   private Bst<Integer> bst;
   private ArrayList<Integer> vals;
+  private ArrayList<Integer> fakeVals;
   private HashSet<Integer> inTree;
   private Random rand;
   private boolean result;
@@ -57,11 +59,20 @@ public class BstTest extends ExecutionContext implements BstModel {
 
 
   @Override
+  public void e_FindFakeVal()
+  {
+    System.out.println( "e_FindFakeVal" );
+    result = bst.find(fakeVals.get(rand.nextInt(fakeVals.size())));
+  }
+
+
+  @Override
   public void e_Init()
   {
     System.out.println( "e_Init" );
     bst = new Bst<Integer>();
     vals = new ArrayList<Integer>(Arrays.asList(1, 3, 4, 6, 7, 8, 10, 13, 14));
+    fakeVals = new ArrayList<Integer>(Arrays.asList(21, 23, 24, 26, 27, 28, 30, 33, 34));
     inTree = new HashSet<Integer>();
     rand = new Random();
     result = false;
@@ -81,6 +92,14 @@ public class BstTest extends ExecutionContext implements BstModel {
   {
     System.out.println( "v_Found" );
     assertTrue(result, "Find failed!");
+  }
+
+
+  @Override
+  public void v_NotFound()
+  {
+    System.out.println( "v_NotFound" );
+    assertFalse(result, "Found a faked value!");
   }
 
 

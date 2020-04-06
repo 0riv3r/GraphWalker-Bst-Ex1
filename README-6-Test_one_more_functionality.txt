@@ -18,12 +18,14 @@ Find
 1. Add the new functionality to the model
     1.1. Launch the GraphWalker studio:
             $ java -jar ../lib/graphwalker-studio-4.2.0.jar
-    1.2. Open the BstModel at:
+    1.2. Open browser at:
+        http://localhost:9090/studio.html
+    1.3. Open the BstModel at:
             src/main/resources/com/cyberark/BstModel.json
-    1.3. Add the required vertex and edges.
-        1.3.1. vertex name: 'v_NotFound'
-        1.3.2. edge name: 'e_FindFakeVal'
-    1.4. make sure to connect the new functionality with the previous functions in the model (add & find)
+    1.4. Add the required vertex and edges.
+        1.4.1. vertex name: 'v_NotFound'
+        1.4.2. edge name: 'e_FindFakeVal'
+    1.5. make sure to connect the new functionality with the previous functions in the model (add & find)
 
 2. generate the test-interface
     $ mvn clean graphwalker:generate-sources
