@@ -38,4 +38,5 @@ Find
 5. Implement the new test methods in BstTest.java
 
 6. Execute the updated tests
+    ( $ export JAVA_HOME=`/usr/libexec/java_home -v 1.8` )
     $ mvn clean graphwalker:generate-sources test site jacoco:prepare-agent jacoco:report

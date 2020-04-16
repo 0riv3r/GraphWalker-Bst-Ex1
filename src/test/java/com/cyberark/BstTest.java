@@ -31,11 +31,12 @@ public class BstTest extends ExecutionContext implements BstModel {
 
   public final static Path MODEL_PATH = Paths.get("com/cyberark/BstModel.json");
   private Bst<Integer> bst;
-  private ArrayList<Integer> vals;
-  private ArrayList<Integer> fakeVals;
-  private HashSet<Integer> inTree;
+  private ArrayList<Integer> vals;      // values to be inserted in the tree
+  private ArrayList<Integer> fakeVals;  // values that are not inserted in the tree
+  private HashSet<Integer> inTree;      // the current values in the tree
   private Random rand;
   private boolean result;
+
 
   @Override
   public void e_Add()
@@ -45,7 +46,6 @@ public class BstTest extends ExecutionContext implements BstModel {
     bst.add(val);
     inTree.add(val);
   }
-
 
   @Override
   public void e_Find()
@@ -117,8 +117,7 @@ public class BstTest extends ExecutionContext implements BstModel {
     assertNotNull(bst);
   }
 
-  
-/** https://github.com/GraphWalker/graphwalker-project/wiki/Test-execution */
+  /** *******************  TESTS RUNNERS  ********************* */
 
   @Test
     public void runSmokeTest() {
