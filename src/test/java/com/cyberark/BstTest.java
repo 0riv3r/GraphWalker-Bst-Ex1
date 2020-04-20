@@ -25,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class BstTest extends ExecutionContext implements BstModel {
@@ -119,6 +120,7 @@ public class BstTest extends ExecutionContext implements BstModel {
 
   /** *******************  TESTS RUNNERS  ********************* */
 
+  //@Disabled
   @Test
     public void runSmokeTest() {
         new TestBuilder()
@@ -128,6 +130,7 @@ public class BstTest extends ExecutionContext implements BstModel {
                 .execute();
     }
 
+    //@Disabled
     @Test
     public void runFunctionalTest() {
         new TestBuilder()
@@ -137,6 +140,7 @@ public class BstTest extends ExecutionContext implements BstModel {
                 .execute();
     }
 
+    //@Disabled
     @Test
     public void runStabilityTest() {
         new TestBuilder()
