@@ -146,7 +146,7 @@ public class Bst<T extends Comparable<T>> {
     }
 
     // delete if leaf
-    public boolean delete(T value) {
+    public void delete(T value) {
         _deleteLeaf(root, value);
     }
 
