@@ -120,7 +120,6 @@ public class BstTest extends ExecutionContext implements BstModel {
 
   /** *******************  TESTS RUNNERS  ********************* */
 
-  //@Disabled
   @Test
     public void runSmokeTest() {
         new TestBuilder()
@@ -130,7 +129,6 @@ public class BstTest extends ExecutionContext implements BstModel {
                 .execute();
     }
 
-    //@Disabled
     @Test
     public void runFunctionalTest() {
         new TestBuilder()
@@ -140,7 +138,6 @@ public class BstTest extends ExecutionContext implements BstModel {
                 .execute();
     }
 
-    //@Disabled
     @Test
     public void runStabilityTest() {
         new TestBuilder()
