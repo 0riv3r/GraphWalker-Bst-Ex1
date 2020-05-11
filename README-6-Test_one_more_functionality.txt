@@ -28,7 +28,7 @@ Find
     1.5. make sure to connect the new functionality with the previous functions in the model (add & find)
 
 2. generate the test-interface
-    $ mvn clean graphwalker:generate-sources
+    $ mvn clean graphwalker:generate-test-sources
 
 3. Generate the updated test file with its default name: MyTest.java
     $ java -jar ../lib/graphwalker-cli-4.2.0.jar source -i src/main/resources/com/cyberark/BstModel.json src/main/templates/java.template > src/test/java/com/cyberark/MyTest.java
@@ -39,4 +39,4 @@ Find
 
 6. Execute the updated tests
     ( $ export JAVA_HOME=`/usr/libexec/java_home -v 1.8` )
-    $ mvn clean graphwalker:generate-sources test site jacoco:prepare-agent jacoco:report
+    $ mvn clean graphwalker:generate-test-sources test site jacoco:prepare-agent jacoco:report

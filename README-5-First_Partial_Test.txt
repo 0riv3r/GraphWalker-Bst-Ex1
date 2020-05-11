@@ -181,7 +181,7 @@ run the following command to generate the test-interface:
 
 $ export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
  
-$ mvn clean graphwalker:generate-sources
+$ mvn clean graphwalker:generate-test-sources
 
 
 You can find the generated test-interface file at:
@@ -468,7 +468,7 @@ If required, make sure to use the correct java
 $ export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 
 $ mvn clean install
-$ mvn clean graphwalker:generate-sources test site jacoco:prepare-agent jacoco:report
+$ mvn clean graphwalker:generate-test-sources test site jacoco:prepare-agent jacoco:report
 
 -----------------------------------------------------------------------------------------------
 
