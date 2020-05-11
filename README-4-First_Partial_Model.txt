@@ -25,7 +25,7 @@ I       nteger value
 
 Create the following first model
 --------------------------------
-src/main/resources/com/cyberark/BstModel.json
+src/test/resources/com/cyberark/BstModel.json
 
 Launch the GraphWalker studio:
 
@@ -44,7 +44,7 @@ v_Start --> e_Init --> v_VerifyInitialState --> e_Add --> v_Added --> e_Find -->
 
 Save the model as: 
 
-src/main/resources/com/cyberark/BstModel.json
+src/test/resources/com/cyberark/BstModel.json
 
 exit the studio with control+c
 
@@ -54,8 +54,8 @@ generate the test cases
 
 in the terminal run the command:
 
-java -jar ../lib/graphwalker-cli-4.2.0.jar offline  -m src/main/resources/com/cyberark/BstModel.json "random(edge_coverage(100))"
+java -jar ../lib/graphwalker-cli-4.2.0.jar offline  -m src/test/resources/com/cyberark/BstModel.json "random(edge_coverage(100))"
 
 if you installed the jq utility, you can run:
 
-java -jar ../lib/graphwalker-cli-4.2.0.jar offline  -m src/main/resources/com/cyberark/BstModel.json "random(edge_coverage(100))"  | jq '.currentElementName'
+java -jar ../lib/graphwalker-cli-4.2.0.jar offline  -m src/test/resources/com/cyberark/BstModel.json "random(edge_coverage(100))"  | jq '.currentElementName'

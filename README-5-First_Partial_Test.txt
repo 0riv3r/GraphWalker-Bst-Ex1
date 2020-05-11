@@ -224,11 +224,11 @@ public interface BstModel {
 *** Generate the Bst Test ***
 =============================
 
-Create 'templates' folder under src/main
+Create 'templates' folder under src/test
 
 Download the java.template into:
 
-src/main/templates/java.template
+src/test/templates/java.template
 
 * Note that in the template each generated test method will have the following line as comment:
 
@@ -329,7 +329,7 @@ src/test/java/com/cyberark/MyTest.java
 Generate test file:
 -------------------
 
-$ java -jar ../lib/graphwalker-cli-4.2.0.jar source -i src/main/resources/com/cyberark/BstModel.json src/main/templates/java.template > src/test/java/com/cyberark/MyTest.java
+$ java -jar ../lib/graphwalker-cli-4.2.0.jar source -i src/test/resources/com/cyberark/BstModel.json src/test/templates/java.template > src/test/java/com/cyberark/MyTest.java
 
 and rename the generated test file to the right file name (i.e. 'BstTest.java')
 

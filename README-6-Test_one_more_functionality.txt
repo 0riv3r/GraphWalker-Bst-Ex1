@@ -21,7 +21,7 @@ Find
     1.2. Open browser at:
         http://localhost:9090/studio.html
     1.3. Open the BstModel at:
-            src/main/resources/com/cyberark/BstModel.json
+            src/test/resources/com/cyberark/BstModel.json
     1.4. Add the required vertex and edges.
         1.4.1. vertex name: 'v_NotFound'
         1.4.2. edge name: 'e_FindFakeVal'
@@ -31,7 +31,7 @@ Find
     $ mvn clean graphwalker:generate-test-sources
 
 3. Generate the updated test file with its default name: MyTest.java
-    $ java -jar ../lib/graphwalker-cli-4.2.0.jar source -i src/main/resources/com/cyberark/BstModel.json src/main/templates/java.template > src/test/java/com/cyberark/MyTest.java
+    $ java -jar ../lib/graphwalker-cli-4.2.0.jar source -i src/test/resources/com/cyberark/BstModel.json src/test/templates/java.template > src/test/java/com/cyberark/MyTest.java
 
 4. From MyTest.java copy the new test methods and paste them in your BstTest.java file. Delete the MyTest.java file
 
