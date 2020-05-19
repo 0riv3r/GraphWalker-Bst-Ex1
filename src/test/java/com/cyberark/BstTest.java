@@ -44,8 +44,21 @@ public class BstTest extends ExecutionContext implements BstModel {
   public void e_Add()
   {
     System.out.println( "e_Add" );
-    int val = vals.get(rand.nextInt(vals.size()));
-    bst.add(val);
+    int val = vals.get(rand.nextInt(vals.size())); // choose value at random
+    bst.add(val); // add the value to the tree
+    /**
+     * add that value to a hash-set
+     * Binary-Serach Tree doesn't hold duplicate values
+     * if the value that is chosen at random is already in the tree
+     * it will not be added.
+     * We then perform the 'add' operation also on the hash-set: inTree,
+     * that also don't accept duplicate values.
+     * If the value that is chosen at random is already in the tree, it ia also
+     * already in inTree. This duplicate then will not be added by Bst.e_Add,
+     * and it will also not be added by inTree.
+     * Bst should always be at the same state as inTree in terms of
+     * the values both have, and this is what you have to check in the vertices
+     */
     inTree.add(val);
   }
 
@@ -73,8 +86,10 @@ public class BstTest extends ExecutionContext implements BstModel {
   {
     System.out.println( "e_Init" );
     bst = new Bst<Integer>();
+    // vals - values to be added to the tree
     vals = new ArrayList<Integer>(Arrays.asList(1, 3, 4, 6, 7, 8, 10, 13, 14));
     fakeVals = new ArrayList<Integer>(Arrays.asList(21, 23, 24, 26, 27, 28, 30, 33, 34));
+    // inTree - values that expected to be in the tree
     inTree = new HashSet<Integer>();
     rand = new Random();
     result = false;
